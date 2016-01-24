@@ -1,0 +1,10 @@
+#!/usr/bin/osascript -l JavaScript
+
+// Display an alert with the given command line arguments as the message
+
+const SystemEvents = Application('System Events');
+SystemEvents.includeStandardAdditions = true;
+
+function run(argv) {
+  SystemEvents.displayAlert(argv.join(' '));
+}
