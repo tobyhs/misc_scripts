@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Basic script to backup development MySQL databases
+
+check_file() {
+  local file="$1"
+  if [ -e "$file" ]; then
+    echo "ERROR: $file already exists" >&2
+    exit 1
+  fi
+}
+
+sql_file="mysqldump.$(date +'%Y-%m-%d').sql"
+compressed_file="${sql_file}.bz2"
+
+check_file "$sql_file"
+check_file "$compressed_file"
+
+TIMEFORMAT=$'  %R seconds\n'
+
+echo 'Running mysqldump'
+time mysqldump --all-databases > "$sql_file"
+
+echo 'Compressing'
+time bzip2 "$sql_file"
