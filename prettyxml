@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# Crude script to pretty print XML
+
+require 'rexml/document'
+
+doc = REXML::Document.new($stdin)
+formatter = REXML::Formatters::Pretty.new
+formatter.compact = true
+formatter.write(doc, $stdout)
