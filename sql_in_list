@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Takes newline-separated strings from standard input and prints something you
+# can use for a SQL IN list.
+
+print_value() {
+  echo -n \'${line//\'/\\\'}\'
+}
+
+echo -n '('
+
+read line
+print_value
+
+while read line; do
+  echo -n ', '
+  print_value
+done
+
+echo ')'
