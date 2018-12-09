@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Takes standard output from a `curl -i` invocation and prints the response
+# headers to the terminal and the response body to standard output so that you
+# can pipe the response body (without the headers) to something else.
+#
+# Example: curl -i localhost:3000/api/users | splitcurli | python -m json.tool
+
+SPLIT_CURLI_OUTPUT=${SPLIT_CURLI_OUTPUT:-/dev/tty}
+
+while read line; do
+  echo "$line" >> "$SPLIT_CURLI_OUTPUT"
+  if [ -z "$line" ] || [ "$line" = $'\r' ]; then
+    cat
+  fi
+done
