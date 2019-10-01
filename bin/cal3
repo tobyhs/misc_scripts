@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-# This emulates "cal -3" from util-linux on Mac
+# This emulates "cal -3" from util-linux on Mac, except that it stacks the
+# months vertically instead of horizontally because I couldn't get `lam` to
+# work correctly and consistently.
 
-format='-f -26'
-lam $format <(cal $(date -v -1m +'%m %Y')) \
-  $format <(cal) \
-  <(cal $(date -v +1m +'%m %Y'))
+cal $(date -v -1m +'%m %Y')
+cal
+cal $(date -v +1m +'%m %Y')
