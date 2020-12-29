@@ -1,0 +1,14 @@
+#!/usr/bin/env osascript -l JavaScript
+
+/**
+ * Resizes an application's front window
+ *
+ * @param {string} appName - name of application
+ * @param {string} width - width in pixels to resize to
+ * @param {string} height - height in pixels to resize to
+ */
+function run([appName, width, height]) {
+  const app = Application(appName);
+  const firstWindow = app.windows()[0];
+  firstWindow.bounds = { ...firstWindow.bounds(), width, height };
+}
