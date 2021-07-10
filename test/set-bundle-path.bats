@@ -27,5 +27,5 @@ teardown() {
 
   run bundle config get path
   [ "$status" -eq 0 ]
-  [[ "$output" == *\"${HOME}/bundles/set-bundle-path-test\"* ]]
+  [[ "$output" == *\"../bundles/set-bundle-path-test\"* ]]
 }

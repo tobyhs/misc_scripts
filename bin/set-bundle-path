@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Sets the bundler path for a Ruby app. It assumes that you are running this in
-# the directory of the Ruby app/library you want to set the bundler path for,
-# and that you want the bundler path to be in a $HOME/bundles directory with
-# the same name as the current directory.
+# the directory of the Ruby project you want to set the bundler path for, and
+# that you want the bundler path to be under ../bundles/ in a directory with
+# the same basename as the current directory.
 
 if ! [ -f Gemfile ]; then
   echo "Run this in a directory with a Gemfile" >&2
@@ -11,6 +11,6 @@ if ! [ -f Gemfile ]; then
 fi
 
 project=$(basename "$PWD")
-bundle_dir="${HOME}/bundles/${project}"
+bundle_dir="../bundles/${project}"
 
 bundle config set --local path "$bundle_dir"
