@@ -1,0 +1,13 @@
+name: test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update && sudo apt-get install bats
+      # Needed for set-bundle-path
+      - run: sudo gem install bundler --version 2.4.10
+      - uses: actions/checkout@v3
+      - run: bats -r test
