@@ -14,18 +14,15 @@ teardown() {
 }
 
 @test "set-bundle-path without Gemfile in directory prints usage" {
-  run set-bundle-path
-  [ "$status" -eq 1 ]
+  run -1 set-bundle-path
   [ "$output" = "Run this in a directory with a Gemfile" ]
   ! [ -e .bundle ]
 }
 
 @test "set-bundle-path with Gemfile in directory sets the bundler path" {
   touch Gemfile
-  run set-bundle-path
-  [ "$status" -eq 0 ]
+  run -0 set-bundle-path
 
-  run bundle config get path
-  [ "$status" -eq 0 ]
+  run -0 bundle config get path
   [[ "$output" == *\"../bundles/set-bundle-path-test\"* ]]
 }
