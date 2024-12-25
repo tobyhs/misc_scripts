@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Script to print a GitHub permalink for a file.
+
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 PATH_TO_FILE" >&2
+  exit 1
+fi
+
+FILE="$1"
+if ! [ -e "$FILE" ]; then
+  echo "Error: File does not exist: $FILE" >&2
+  exit 1
+fi
+
+remote_url="$(git remote get-url origin)"
+repo_url="${remote_url/#git@github.com:/https://github.com/}"
+repo_url="${repo_url%.git}"
+commit_hash="$(git log -n 1 --format=%H "$FILE")"
+prefix="$(git rev-parse --show-prefix)"
+echo "${repo_url}/blob/${commit_hash}/${prefix}${FILE}"
