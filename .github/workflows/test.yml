@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - run: sudo apt-get update && sudo apt-get install bats
       # Needed for set-bundle-path
