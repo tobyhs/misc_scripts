@@ -14,7 +14,7 @@ load test_helper
 
 @test "gh-permalink when given an existent file prints a GitHub permalink" {
   pushd "${BATS_TEST_DIRNAME}/fixtures"
-  run -0 gh-permalink gh-permalink/file
+  run -0 gh-permalink 'gh-permalink/[dir]/[(file)].txt'
   popd
-  [ "$output" = 'https://github.com/tobyhs/misc_scripts/blob/8858af58a94c23638f8dea65376fae878c7596d8/test/fixtures/gh-permalink/file' ]
+  [ "$output" = 'https://github.com/tobyhs/misc_scripts/blob/1755eb9363ec244b59f87edf5e027d59ed091630/test/fixtures/gh-permalink/%5Bdir%5D/%5B(file)%5D.txt' ]
 }
